@@ -92,7 +92,7 @@ def save_profile_to_db(profile):
     conn.commit()
     conn.close()
 
-
+# Основна функция
 def main():
     profile = ask_questions()
     
