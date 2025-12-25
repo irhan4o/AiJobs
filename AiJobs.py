@@ -1,5 +1,6 @@
 from db import get_connection
 from repository import get_last_profiles
+from repository import get_last_profiles, find_jobs_by_role_and_city
 
 def ask_questions():
     print("Кратък въпросник за профил:")
@@ -54,11 +55,16 @@ def main():
     profile = ask_questions()
     role = recommend_role(profile)
     print(f"\nПодходяща стартова позиция за теб: {role}")
+
     save_profile_to_db(profile)
 
-    print("\nПоследни профили в базата:")
-    for row in get_last_profiles(5):
-        print(row)
+    print("\nПодходящи обяви за тази роля:")
+    jobs = find_jobs_by_role_and_city(role, profile["city"])
+    if not jobs:
+        print("Няма намерени обяви в момента.")
+    else:
+        for title, company, city, link in jobs:
+            print(f"- {title} @ {company} ({city}) -> {link}")
 
 if __name__ == "__main__":
     main()
