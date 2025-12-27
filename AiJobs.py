@@ -1,3 +1,4 @@
+import profile
 from db import get_connection
 from repository import get_last_profiles
 from repository import get_last_profiles, find_jobs_by_role_and_city
@@ -72,13 +73,13 @@ def recommend_role(profile):
     return best_role
 
 
-def save_profile_to_db(profile):
+def save_profile_to_db(profile, role):
     conn = get_connection()
     cursor = conn.cursor()
 
     query = """
-        INSERT INTO UserProfiles (Name, MainInterest, Lang, ExpLevel, City)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Profiles (Name, MainInterest, Lang, Exp, City, RecommendedRole)
+        VALUES (?, ?, ?, ?, ?, ?)
     """
     cursor.execute(
         query,
@@ -87,20 +88,19 @@ def save_profile_to_db(profile):
         profile["lang"],
         profile["exp"],
         profile["city"],
+        role,
     )
-
     conn.commit()
     conn.close()
 
 # Основна функция
 def main():
     profile = ask_questions()
-    
 
     role = recommend_role(profile)
     print(f"\nПодходяща стартова позиция за теб: {role}")
 
-    save_profile_to_db(profile)
+    save_profile_to_db(profile, role)
 
     print("\nПодходящи обяви за тази роля:")
     jobs = find_jobs_by_role_and_city(role, profile["city"])
