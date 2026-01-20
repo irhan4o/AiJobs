@@ -1,4 +1,30 @@
-# AIJobs
+# AiJobs - AI-Driven Career Recommendation System 🚀
 
-Малко Python приложение, което събира данни за профила ти, записва ги в SQL Server
-и връща подходяща стартова позиция.
+## Overview
+**AiJobs** is a machine learning project born from a desire to understand how Artificial Intelligence can help people navigate their professional journeys. This system automates the process of matching user profiles (interests, experience, location) with suitable job roles using a multiclass classification approach.
+
+## Key Features
+- **AI Recommendation Engine:** Uses a Multiclass Logistic Regression model to predict the best-fitting job role for a user.
+- **End-to-End Pipeline:** Implements a Scikit-learn pipeline including `ColumnTransformer` and `OneHotEncoder` for efficient data preprocessing.
+- **SQL Integration:** Designed to fetch and manage user data directly from a **SQL Server** database via `pyodbc`.
+- **Scalable Architecture:** Built with a focus on clean code and modularity for future integration with web interfaces.
+
+## Tech Stack
+- **Language:** Python
+- **Libraries:** Pandas, Scikit-learn, Joblib
+- **Database:** Microsoft SQL Server (T-SQL)
+- **Development Environment:** VS Code, SQL Server Management Studio (SSMS)
+
+## How It Works
+1. **Data Retrieval:** Fetches user profile data from the SQL database.
+2. **Preprocessing:** Automatically encodes categorical features (Interests, Languages, City, ExpLevel).
+3. **Model Training:** Trains on labeled data to recognize patterns between user traits and recommended roles.
+4. **Prediction:** Generates a personalized career recommendation.
+
+## Future Improvements
+- Transitioning to a **Random Forest** model for higher accuracy.
+- Integrating **Natural Language Processing (NLP)** to analyze job descriptions directly.
+- Building a web-based UI using **Flask** or **FastAPI**.
+
+---
+*Developed as part of my AI Portfolio at the Technical University of Sofia.*
